@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Downloader</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+              <h1>Instagram Video Downloader</h1>
+        <input type="text" placeholder="Instagram Video Link" id="url" />
+        <button class="btn" onclick="downloadVideo()">Download</button>
+      </div>
+      <p>Powered by <a href="https://github.com/OgabekYuldoshev">@OgabekYuldoshev</a></p>
+    </div>
+
+    <script>
+      async function downloadVideo() {
+        const url = document.getElementById("url").value;
+
+        if (url.length !== 0) {
+          await fetch("/api/download", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify({
+              url: url,
+            }), // body data type must match "Content-Type" header
+          })
+            .then((result) => result.json())
+            .then((data) => {
+              if(data.error){
+                  alert(data.error)
+              } else {
+                window.open(data.downloadLink);
+              }
+            })
+            .catch((err) => {
+              alert(err)
+            });
+        }
+      }
+    </script>
+  </body>
+</html>

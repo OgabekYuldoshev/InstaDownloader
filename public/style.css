@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(221, 221, 221);
+}
+.container {
+  display: grid;
+  gap: 2vh;
+  width: 50%;
+}
+#url {
+  padding: 5px 10px;
+  text-align: center;
+}
+.btn {
+  padding: 5px 10px;
+}
+h1{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+p{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
